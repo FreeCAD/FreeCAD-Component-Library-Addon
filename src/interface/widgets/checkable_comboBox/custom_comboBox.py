@@ -10,9 +10,9 @@
 # |																|
 # --------------------------------------------------------------
 
-from PySide.QtCore import Qt, Signal
-from PySide.QtGui import QStandardItem
-from PySide.QtWidgets import QComboBox
+from PySide6.QtCore import Qt, Signal
+from PySide6.QtGui import QStandardItem
+from PySide6.QtWidgets import QComboBox
 
 
 class CheckableComboBox(QComboBox):

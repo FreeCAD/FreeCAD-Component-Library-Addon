@@ -14,8 +14,8 @@ from functools import cache
 from pathlib import Path
 from typing import Any
 
-from PySide.QtCore import QEventLoop, Signal, Slot
-from PySide.QtNetwork import QNetworkRequest
+from PySide6.QtCore import QEventLoop, Signal, Slot
+from PySide6.QtNetwork import QNetworkRequest
 
 from ...api.cms_api import (
     CMSApi,
@@ -101,13 +101,13 @@ class OnlineRepoManager(ManagerInterface):
         self.query.page = self.page_states.prev_page
         return self.request_components()
 
-    def search(self, search_key: str) -> CMSReply:
+    def search(self, search_str: str) -> CMSReply:
         """
         Search a component in the Component Management System API
 
         Parameters
         ----------
-        search_key : str
+        search_str : str
             name of component to search
 
         Returns
@@ -115,7 +115,7 @@ class OnlineRepoManager(ManagerInterface):
         CMSReply
             network reply from API
         """
-        self.query.search_key = search_key
+        self.query.search_str = search_str
         return self.reload_page()
 
     def sort(self, /, by: str, order: str) -> CMSReply:
@@ -158,7 +158,9 @@ class OnlineRepoManager(ManagerInterface):
         self.query.tags = tags
         return self.reload_page()
 
-    def download_component(self, component: Component, filetype: FileTypes) -> FileDownloader:
+    def download_component(
+        self, component: Component, filetype: FileTypes
+    ) -> FileDownloader:
         """
         Download a component from the Component Management System API to the Local.
 
@@ -220,7 +222,9 @@ class OnlineRepoManager(ManagerInterface):
             return
 
         request = ComponentRequest()
-        request.setRawHeader("X-Access-Token".encode(), Config.GITHUB_ACCESS_TOKEN.encode())
+        request.setRawHeader(
+            "X-Access-Token".encode(), Config.GITHUB_ACCESS_TOKEN.encode()
+        )
         reply = self.api.create(request, multi_part)
         multi_part.setParent(reply)
         return reply

@@ -4,8 +4,6 @@
 # https://opensource.org/licenses/MIT
 
 
-from typing import Literal
-
 import FreeCAD
 import FreeCADGui
 
@@ -28,7 +26,7 @@ class ComponentLibraryWorkbench(Workbench):
     def Activated(self):
         ...
 
-    def GetClassName(self) -> Literal["Gui::PythonWorkbench"]:
+    def GetClassName(self):
         return "Gui::PythonWorkbench"
 
 

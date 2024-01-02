@@ -13,8 +13,8 @@
 from abc import ABC, ABCMeta
 from typing import Type
 
-from PySide.QtCore import QObject
-from PySide.QtWidgets import QWidget
+from PySide6.QtCore import QObject
+from PySide6.QtWidgets import QWidget
 
 QObjectMeta = type(QObject)
 QWidgetMeta = type(QWidget)
@@ -37,7 +37,6 @@ class ABCQWidget(QWidget, ABC, metaclass=_ABCQWidgetMeta):
 
 
 def singleton(cls: Type):
-
     instances = {}
 
     def get_instance(*args, **kwargs):

@@ -13,8 +13,8 @@
 from functools import wraps
 from typing import Callable
 
-from PySide.QtCore import Slot
-from PySide.QtWidgets import QWidget
+from PySide6.QtCore import Slot
+from PySide6.QtWidgets import QWidget
 
 from ....data import DTypes
 from ....manager import ManagerInterface, OnlineRepoManager

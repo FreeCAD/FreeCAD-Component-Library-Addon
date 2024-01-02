@@ -20,7 +20,7 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide.QtCore import (
+from PySide6.QtCore import (
     QCoreApplication,
     QDate,
     QDateTime,
@@ -30,11 +30,11 @@ from PySide.QtCore import (
     QPoint,
     QRect,
     QSize,
+    Qt,
     QTime,
     QUrl,
-    Qt,
 )
-from PySide.QtGui import (
+from PySide6.QtGui import (
     QBrush,
     QColor,
     QConicalGradient,
@@ -52,7 +52,7 @@ from PySide.QtGui import (
     QRadialGradient,
     QTransform,
 )
-from PySide.QtWidgets import (
+from PySide6.QtWidgets import (
     QApplication,
     QFrame,
     QHBoxLayout,
@@ -95,7 +95,9 @@ class Ui_ComponentItemView(object):
 
         self.bottomPanel = QWidget(self.frame)
         self.bottomPanel.setObjectName("bottomPanel")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
+        sizePolicy1 = QSizePolicy(
+            QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum
+        )
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.bottomPanel.sizePolicy().hasHeightForWidth())
@@ -129,6 +131,8 @@ class Ui_ComponentItemView(object):
         self.componentLabel.setText(
             QCoreApplication.translate("ComponentItemView", "Component Label", None)
         )
-        self.pushButton.setText(QCoreApplication.translate("ComponentItemView", "Download", None))
+        self.pushButton.setText(
+            QCoreApplication.translate("ComponentItemView", "Download", None)
+        )
 
     # retranslateUi

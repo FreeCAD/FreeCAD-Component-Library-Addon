@@ -14,8 +14,8 @@
 import json
 from typing import Any
 
-from PySide.QtCore import QObject, Signal, Slot
-from PySide.QtNetwork import QNetworkReply
+from PySide6.QtCore import QObject, Signal, Slot
+from PySide6.QtNetwork import QNetworkReply
 
 
 class CMSReply(QObject):

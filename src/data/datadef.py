@@ -12,7 +12,9 @@
 
 import json
 from dataclasses import InitVar, dataclass, field
-from typing import Any, Literal
+from importlib import metadata
+from typing import Any, Literal, TypedDict
+
 from .data_types import DTypes, FileTypes
 from .factory import DataFactory
 
@@ -202,6 +204,13 @@ class Tag(_Data, dtype=DTypes.TAG):
 
 
 @dataclass(kw_only=True)
+class Attribute(_Data, dtype=DTypes.ATTRIBUTE):
+    key: str = ""
+    value: str = ""
+    metadata_id: str = ""
+
+
+@dataclass(kw_only=True)
 class Component(DataFactory, dtype=DTypes.COMPONENT):
     """
     Component class represents a component.
@@ -254,6 +263,7 @@ class Component(DataFactory, dtype=DTypes.COMPONENT):
     files: dict[FileTypes, File] = field(default_factory=dict)
     license: License = None
     tags: list[Tag] = field(default_factory=list)
+    attributes: list[Attribute] = field(default_factory=list)
 
     def __post_init__(self, *args, **kwargs):
         """
@@ -282,7 +292,9 @@ class Component(DataFactory, dtype=DTypes.COMPONENT):
         if isinstance(self.files, list):
             self.files = {
                 file.type: file
-                for file in DataFactory.load_many(data_list=self.files, dtype=DTypes.FILE)
+                for file in DataFactory.load_many(
+                    data_list=self.files, dtype=DTypes.FILE
+                )
             }
         elif isinstance(self.files, dict):
             self.files = {
@@ -293,6 +305,9 @@ class Component(DataFactory, dtype=DTypes.COMPONENT):
             }
         self.license = DataFactory.create(dtype=DTypes.LICENSE, **self.license)
         self.tags = DataFactory.load_many(data_list=self.tags, dtype=DTypes.TAG)
+        self.attributes = DataFactory.load_many(
+            data_list=self.attributes, dtype=DTypes.ATTRIBUTE
+        )
 
     def serialize(self) -> dict[str, Any]:
         """

@@ -13,7 +13,7 @@
 from dataclasses import dataclass, field
 from typing import Any
 
-from PySide.QtCore import QObject, Signal
+from PySide6.QtCore import QObject, Signal
 
 from ...api.local_api.storage_adapter import LocalData
 from ...config import Config
@@ -85,7 +85,9 @@ class PageStates(QObject):
             for component in components:
                 self.update_existing_files_for_component(component, local_data)
 
-    def update_existing_files_for_component(self, component: Component, local_data) -> None:
+    def update_existing_files_for_component(
+        self, component: Component, local_data
+    ) -> None:
         """
         Update the existing files for a component with their existence status.
 

@@ -12,9 +12,9 @@
 
 from __future__ import annotations
 
-from PySide.QtCore import QUrl
-from PySide.QtGui import QImage, QPixmap
-from PySide.QtWidgets import QLabel, QWidget
+from PySide6.QtCore import Qt, QUrl
+from PySide6.QtGui import QImage, QPixmap
+from PySide6.QtWidgets import QLabel, QSizePolicy, QWidget
 
 from ....manager.download_manager import ImageLoader
 
@@ -36,8 +36,22 @@ class Thumbnail(QLabel):
             The URL of the image, by default None.
         """
         super().__init__(parent)
-        self.setScaledContents(True)
-        self.setPixmap(QPixmap(ImageLoader.LOADING_THUMBNAIL_PATH))
+
+        self._raw_image = None
+
+        self.setSizePolicy(
+            QSizePolicy.Policy.Expanding,
+            QSizePolicy.Policy.Expanding,
+        )
+        # self.setScaledContents(True)
+        self.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.setPixmap(
+            QPixmap(ImageLoader.LOADING_THUMBNAIL_PATH).scaled(
+                self.size(),
+                aspectMode=Qt.AspectRatioMode.KeepAspectRatio,
+                mode=Qt.TransformationMode.SmoothTransformation,
+            )
+        )
         self.downloader = ImageLoader()
         self.downloader.finished.connect(self.loadImage)
         if url:
@@ -63,11 +77,17 @@ class Thumbnail(QLabel):
         image : QImage
             The downloaded image.
         """
-        pixmap = QPixmap(image)
-        self.setPixmap(pixmap)
+        self._raw_image: QImage = image
+        self.setPixmap(
+            QPixmap(image).scaled(
+                self.size(),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation,
+            )
+        )
 
     @staticmethod
-    def from_existing(parent, thumbnail: Thumbnail):
+    def from_existing(parent, thumbnail: Thumbnail) -> Thumbnail:
         """
         Static method to create a new Thumbnail from an existing Thumbnail's pixmap.
 
@@ -84,5 +104,12 @@ class Thumbnail(QLabel):
             A new Thumbnail instance with the same pixmap as the existing thumbnail.
         """
         new_thumbnail = Thumbnail(parent)
-        new_thumbnail.setPixmap(thumbnail.pixmap())
+        new_thumbnail.setPixmap(
+            thumbnail.pixmap().scaled(
+                thumbnail.size(),
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation,
+            )
+        )
+        # new_thumbnail.loadImage(thumbnail._raw_image)
         return new_thumbnail

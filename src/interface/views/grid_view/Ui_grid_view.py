@@ -20,7 +20,7 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide.QtCore import (
+from PySide6.QtCore import (
     QCoreApplication,
     QDate,
     QDateTime,
@@ -30,11 +30,11 @@ from PySide.QtCore import (
     QPoint,
     QRect,
     QSize,
+    Qt,
     QTime,
     QUrl,
-    Qt,
 )
-from PySide.QtGui import (
+from PySide6.QtGui import (
     QBrush,
     QColor,
     QConicalGradient,
@@ -52,7 +52,7 @@ from PySide.QtGui import (
     QRadialGradient,
     QTransform,
 )
-from PySide.QtWidgets import (
+from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
     QFrame,
@@ -91,7 +91,9 @@ class Ui_gridView(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.searchLabel = QLabel(self.searchWidget)
         self.searchLabel.setObjectName("searchLabel")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred)
+        sizePolicy = QSizePolicy(
+            QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.searchLabel.sizePolicy().hasHeightForWidth())
@@ -101,10 +103,14 @@ class Ui_gridView(object):
 
         self.searchLineEdit = QLineEdit(self.searchWidget)
         self.searchLineEdit.setObjectName("searchLineEdit")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy1 = QSizePolicy(
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
+        )
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.searchLineEdit.sizePolicy().hasHeightForWidth())
+        sizePolicy1.setHeightForWidth(
+            self.searchLineEdit.sizePolicy().hasHeightForWidth()
+        )
         self.searchLineEdit.setSizePolicy(sizePolicy1)
         self.searchLineEdit.setMinimumSize(QSize(0, 35))
         self.searchLineEdit.setStyleSheet("border: 0px ;\n" "")
@@ -167,7 +173,9 @@ class Ui_gridView(object):
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.fileTypeLabel = QLabel(self.fileTypeWidget)
         self.fileTypeLabel.setObjectName("fileTypeLabel")
-        sizePolicy.setHeightForWidth(self.fileTypeLabel.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.fileTypeLabel.sizePolicy().hasHeightForWidth()
+        )
         self.fileTypeLabel.setSizePolicy(sizePolicy)
 
         self.horizontalLayout_11.addWidget(self.fileTypeLabel)
@@ -209,7 +217,9 @@ class Ui_gridView(object):
 
         self.tagBar = TagBar(self.tagBarWidget)
         self.tagBar.setObjectName("tagBar")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        sizePolicy2 = QSizePolicy(
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred
+        )
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.tagBar.sizePolicy().hasHeightForWidth())
@@ -280,23 +290,45 @@ class Ui_gridView(object):
         gridView.setWindowTitle(QCoreApplication.translate("gridView", "Form", None))
         self.searchLabel.setText(QCoreApplication.translate("gridView", "Search", None))
         self.sortLabel.setText(QCoreApplication.translate("gridView", "sort", None))
-        self.sortComboBox.setItemText(0, QCoreApplication.translate("gridView", "Name", None))
-        self.sortComboBox.setItemText(1, QCoreApplication.translate("gridView", "Created", None))
-        self.sortComboBox.setItemText(2, QCoreApplication.translate("gridView", "Updated", None))
-        self.sortComboBox.setItemText(3, QCoreApplication.translate("gridView", "Rating", None))
+        self.sortComboBox.setItemText(
+            0, QCoreApplication.translate("gridView", "Name", None)
+        )
+        self.sortComboBox.setItemText(
+            1, QCoreApplication.translate("gridView", "Created", None)
+        )
+        self.sortComboBox.setItemText(
+            2, QCoreApplication.translate("gridView", "Updated", None)
+        )
+        self.sortComboBox.setItemText(
+            3, QCoreApplication.translate("gridView", "Rating", None)
+        )
 
         self.orderLabel.setText(QCoreApplication.translate("gridView", "order", None))
-        self.orderComboBox.setItemText(0, QCoreApplication.translate("gridView", "ascending", None))
+        self.orderComboBox.setItemText(
+            0, QCoreApplication.translate("gridView", "ascending", None)
+        )
         self.orderComboBox.setItemText(
             1, QCoreApplication.translate("gridView", "descending", None)
         )
 
-        self.fileTypeLabel.setText(QCoreApplication.translate("gridView", "filetype", None))
-        self.fileTypeComboBox.setItemText(0, QCoreApplication.translate("gridView", "step", None))
-        self.fileTypeComboBox.setItemText(1, QCoreApplication.translate("gridView", "fcstd", None))
-        self.fileTypeComboBox.setItemText(2, QCoreApplication.translate("gridView", "fcstd1", None))
-        self.fileTypeComboBox.setItemText(3, QCoreApplication.translate("gridView", "stl", None))
-        self.fileTypeComboBox.setItemText(4, QCoreApplication.translate("gridView", "stp", None))
+        self.fileTypeLabel.setText(
+            QCoreApplication.translate("gridView", "filetype", None)
+        )
+        self.fileTypeComboBox.setItemText(
+            0, QCoreApplication.translate("gridView", "step", None)
+        )
+        self.fileTypeComboBox.setItemText(
+            1, QCoreApplication.translate("gridView", "fcstd", None)
+        )
+        self.fileTypeComboBox.setItemText(
+            2, QCoreApplication.translate("gridView", "fcstd1", None)
+        )
+        self.fileTypeComboBox.setItemText(
+            3, QCoreApplication.translate("gridView", "stl", None)
+        )
+        self.fileTypeComboBox.setItemText(
+            4, QCoreApplication.translate("gridView", "stp", None)
+        )
 
         self.tagBarLabel.setText(QCoreApplication.translate("gridView", "Tags", None))
         self.prevButton.setText(QCoreApplication.translate("gridView", "Prev", None))

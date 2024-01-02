@@ -11,8 +11,9 @@
 # --------------------------------------------------------------
 
 from typing import Any
-from PySide.QtCore import Slot
-from PySide.QtWidgets import QDialog, QPushButton
+
+from PySide6.QtCore import Slot
+from PySide6.QtWidgets import QDialog, QPushButton
 
 from ....data import DTypes
 from ....manager import OnlineRepoManager

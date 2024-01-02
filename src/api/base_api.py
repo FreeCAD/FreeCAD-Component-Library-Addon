@@ -12,7 +12,7 @@
 
 from abc import abstractmethod
 
-from PySide.QtNetwork import QNetworkReply
+from PySide6.QtNetwork import QNetworkReply
 
 from ..utils import ABCQObject
 

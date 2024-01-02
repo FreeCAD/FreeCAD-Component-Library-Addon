@@ -23,6 +23,7 @@ class DTypes(Enum):
     LICENSE = "license"
     METADATA = "metadata"
     TAG = "tag"
+    ATTRIBUTE = "attribute"
 
 
 class FileTypes(Enum):

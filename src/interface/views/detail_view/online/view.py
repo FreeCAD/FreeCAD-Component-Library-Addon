@@ -13,8 +13,8 @@
 from enum import Enum, auto
 from pathlib import Path
 
-from PySide.QtCore import Slot
-from PySide.QtWidgets import QProgressBar, QWidget
+from PySide6.QtCore import Slot
+from PySide6.QtWidgets import QProgressBar, QWidget
 
 from .....manager import ManagerInterface, OnlineRepoManager
 from ....widgets import ComponentItem, StatefulPushButton
@@ -82,7 +82,9 @@ class OnlineDetailedView(BaseDetailedView):
             DownloadStates.FINISHED, self.removeButton_click, "Remove", True
         )
 
-        self.ui.filetypeComboBox.currentTextChanged.connect(self.update_download_button_state)
+        self.ui.filetypeComboBox.currentTextChanged.connect(
+            self.update_download_button_state
+        )
 
     def setupManager(self, manager: ManagerInterface) -> None:
         """
@@ -136,7 +138,9 @@ class OnlineDetailedView(BaseDetailedView):
         print("Download started...")
 
     @Slot(int, int)
-    def __update_download_progress(self, bytes_received: bytes, total_bytes: bytes) -> None:
+    def __update_download_progress(
+        self, bytes_received: bytes, total_bytes: bytes
+    ) -> None:
         """
         Slot method to update the download progress
 

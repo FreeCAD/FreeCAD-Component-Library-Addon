@@ -12,9 +12,9 @@
 
 from pathlib import Path
 
-from PySide.QtCore import QFile, QIODevice, QObject, QUrl, Signal, Slot
-from PySide.QtGui import QImage
-from PySide.QtNetwork import QNetworkReply, QNetworkRequest
+from PySide6.QtCore import QFile, QIODevice, QObject, QUrl, Signal, Slot
+from PySide6.QtGui import QImage
+from PySide6.QtNetwork import QNetworkReply, QNetworkRequest
 
 from ...network.network_manager import get_network_access_manager
 

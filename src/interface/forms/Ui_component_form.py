@@ -20,7 +20,7 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide.QtCore import (
+from PySide6.QtCore import (
     QCoreApplication,
     QDate,
     QDateTime,
@@ -30,11 +30,11 @@ from PySide.QtCore import (
     QPoint,
     QRect,
     QSize,
+    Qt,
     QTime,
     QUrl,
-    Qt,
 )
-from PySide.QtGui import (
+from PySide6.QtGui import (
     QBrush,
     QColor,
     QConicalGradient,
@@ -52,7 +52,7 @@ from PySide.QtGui import (
     QRadialGradient,
     QTransform,
 )
-from PySide.QtWidgets import (
+from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
     QDialog,
@@ -79,10 +79,14 @@ class Ui_ComponentCreationForm(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.componentNameWidget = QWidget(ComponentCreationForm)
         self.componentNameWidget.setObjectName("componentNameWidget")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
+        sizePolicy = QSizePolicy(
+            QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.componentNameWidget.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.componentNameWidget.sizePolicy().hasHeightForWidth()
+        )
         self.componentNameWidget.setSizePolicy(sizePolicy)
         self.horizontalLayout_3 = QHBoxLayout(self.componentNameWidget)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
@@ -93,10 +97,14 @@ class Ui_ComponentCreationForm(object):
 
         self.componentNameInput = QLineEdit(self.componentNameWidget)
         self.componentNameInput.setObjectName("componentNameInput")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Maximum)
+        sizePolicy1 = QSizePolicy(
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Maximum
+        )
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.componentNameInput.sizePolicy().hasHeightForWidth())
+        sizePolicy1.setHeightForWidth(
+            self.componentNameInput.sizePolicy().hasHeightForWidth()
+        )
         self.componentNameInput.setSizePolicy(sizePolicy1)
         font = QFont()
         font.setPointSize(18)
@@ -108,7 +116,9 @@ class Ui_ComponentCreationForm(object):
 
         self.metadataWidget = QWidget(ComponentCreationForm)
         self.metadataWidget.setObjectName("metadataWidget")
-        sizePolicy.setHeightForWidth(self.metadataWidget.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.metadataWidget.sizePolicy().hasHeightForWidth()
+        )
         self.metadataWidget.setSizePolicy(sizePolicy)
         self.metadataWidget.setMouseTracking(False)
         self.metadataWidget.setFocusPolicy(Qt.FocusPolicy.NoFocus)
@@ -118,7 +128,9 @@ class Ui_ComponentCreationForm(object):
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.authorLabel = QLabel(self.metadataWidget)
         self.authorLabel.setObjectName("authorLabel")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        sizePolicy2 = QSizePolicy(
+            QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum
+        )
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.authorLabel.sizePolicy().hasHeightForWidth())
@@ -128,7 +140,9 @@ class Ui_ComponentCreationForm(object):
 
         self.maintainerInput = QLineEdit(self.metadataWidget)
         self.maintainerInput.setObjectName("maintainerInput")
-        sizePolicy1.setHeightForWidth(self.maintainerInput.sizePolicy().hasHeightForWidth())
+        sizePolicy1.setHeightForWidth(
+            self.maintainerInput.sizePolicy().hasHeightForWidth()
+        )
         self.maintainerInput.setSizePolicy(sizePolicy1)
         font1 = QFont()
         font1.setPointSize(12)
@@ -138,14 +152,18 @@ class Ui_ComponentCreationForm(object):
 
         self.mainteinerLabel = QLabel(self.metadataWidget)
         self.mainteinerLabel.setObjectName("mainteinerLabel")
-        sizePolicy.setHeightForWidth(self.mainteinerLabel.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.mainteinerLabel.sizePolicy().hasHeightForWidth()
+        )
         self.mainteinerLabel.setSizePolicy(sizePolicy)
 
         self.gridLayout.addWidget(self.mainteinerLabel, 2, 0, 1, 1)
 
         self.licenseInput = QComboBox(self.metadataWidget)
         self.licenseInput.setObjectName("licenseInput")
-        sizePolicy1.setHeightForWidth(self.licenseInput.sizePolicy().hasHeightForWidth())
+        sizePolicy1.setHeightForWidth(
+            self.licenseInput.sizePolicy().hasHeightForWidth()
+        )
         self.licenseInput.setSizePolicy(sizePolicy1)
         self.licenseInput.setMaximumSize(QSize(16777215, 16777215))
 
@@ -191,10 +209,14 @@ class Ui_ComponentCreationForm(object):
 
         self.componentFiles = FileList(ComponentCreationForm)
         self.componentFiles.setObjectName("componentFiles")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        sizePolicy3 = QSizePolicy(
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
+        )
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.componentFiles.sizePolicy().hasHeightForWidth())
+        sizePolicy3.setHeightForWidth(
+            self.componentFiles.sizePolicy().hasHeightForWidth()
+        )
         self.componentFiles.setSizePolicy(sizePolicy3)
 
         self.verticalLayout.addWidget(self.componentFiles)
@@ -208,14 +230,18 @@ class Ui_ComponentCreationForm(object):
 
         self.thumbnailFile = FileItem(ComponentCreationForm)
         self.thumbnailFile.setObjectName("thumbnailFile")
-        sizePolicy1.setHeightForWidth(self.thumbnailFile.sizePolicy().hasHeightForWidth())
+        sizePolicy1.setHeightForWidth(
+            self.thumbnailFile.sizePolicy().hasHeightForWidth()
+        )
         self.thumbnailFile.setSizePolicy(sizePolicy1)
 
         self.verticalLayout.addWidget(self.thumbnailFile)
 
         self.descriptionLabel = QLabel(ComponentCreationForm)
         self.descriptionLabel.setObjectName("descriptionLabel")
-        sizePolicy.setHeightForWidth(self.descriptionLabel.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.descriptionLabel.sizePolicy().hasHeightForWidth()
+        )
         self.descriptionLabel.setSizePolicy(sizePolicy)
         self.descriptionLabel.setMaximumSize(QSize(16777213, 16777215))
 
@@ -223,7 +249,9 @@ class Ui_ComponentCreationForm(object):
 
         self.descriptionInput = QPlainTextEdit(ComponentCreationForm)
         self.descriptionInput.setObjectName("descriptionInput")
-        sizePolicy1.setHeightForWidth(self.descriptionInput.sizePolicy().hasHeightForWidth())
+        sizePolicy1.setHeightForWidth(
+            self.descriptionInput.sizePolicy().hasHeightForWidth()
+        )
         self.descriptionInput.setSizePolicy(sizePolicy1)
         self.descriptionInput.setFont(font1)
 
@@ -262,7 +290,9 @@ class Ui_ComponentCreationForm(object):
         )
         self.componentNameInput.setInputMask("")
         self.componentNameInput.setPlaceholderText(
-            QCoreApplication.translate("ComponentCreationForm", "name of the component", None)
+            QCoreApplication.translate(
+                "ComponentCreationForm", "name of the component", None
+            )
         )
         self.authorLabel.setText(
             QCoreApplication.translate(
@@ -272,7 +302,9 @@ class Ui_ComponentCreationForm(object):
             )
         )
         self.maintainerInput.setPlaceholderText(
-            QCoreApplication.translate("ComponentCreationForm", "maintailer@email.com", None)
+            QCoreApplication.translate(
+                "ComponentCreationForm", "maintailer@email.com", None
+            )
         )
         self.mainteinerLabel.setText(
             QCoreApplication.translate(
@@ -296,7 +328,9 @@ class Ui_ComponentCreationForm(object):
             )
         )
         self.authorInput.setPlaceholderText(
-            QCoreApplication.translate("ComponentCreationForm", "author@email.com", None)
+            QCoreApplication.translate(
+                "ComponentCreationForm", "author@email.com", None
+            )
         )
         self.compLabel.setText(
             QCoreApplication.translate(

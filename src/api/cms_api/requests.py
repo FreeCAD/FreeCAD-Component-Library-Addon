@@ -10,8 +10,8 @@
 # |																|
 # --------------------------------------------------------------
 
-from PySide.QtCore import QFile, QIODevice, QUrl, QUrlQuery
-from PySide.QtNetwork import QHttpMultiPart, QHttpPart, QNetworkRequest
+from PySide6.QtCore import QFile, QIODevice, QUrl, QUrlQuery
+from PySide6.QtNetwork import QHttpMultiPart, QHttpPart, QNetworkRequest
 
 from .query import RepoComponentQuery
 
@@ -23,7 +23,9 @@ class ComponentRequest(QNetworkRequest):
 
     endpoint: str = "component"
 
-    def __init__(self, state: RepoComponentQuery | None = None, *args, **kwargs) -> None:
+    def __init__(
+        self, state: RepoComponentQuery | None = None, *args, **kwargs
+    ) -> None:
         """
         Initializes the ComponentRequest object.
         """
@@ -49,7 +51,7 @@ class ComponentRequest(QNetworkRequest):
         query_list: list[str] = [
             state.page,
             state.page_size,
-            state.search_key,
+            state.search_str,
             state.sort_by,
             state.sort_ord,
             state.file_types,

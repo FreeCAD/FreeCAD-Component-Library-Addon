@@ -13,8 +13,8 @@
 from functools import cache
 
 import certifi
-from PySide.QtCore import Slot
-from PySide.QtNetwork import (
+from PySide6.QtCore import Slot
+from PySide6.QtNetwork import (
     QNetworkAccessManager,
     QNetworkReply,
     QNetworkRequest,

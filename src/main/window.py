@@ -10,8 +10,8 @@
 # |																|
 # --------------------------------------------------------------
 
-from PySide.QtCore import Slot
-from PySide.QtWidgets import QMainWindow, QWidget
+from PySide6.QtCore import Slot
+from PySide6.QtWidgets import QMainWindow, QWidget
 
 from ..interface.forms import ComponetUploadDialog
 from ..interface.views import GridView, LocalDetailedView, OnlineDetailedView
@@ -69,7 +69,9 @@ class Window(QMainWindow):
         self.ui.uploadButton.clicked.connect(self.uploadButton_clicked)
         self.ui.LocalButton.clicked.connect(self.display_local_components)
 
-    def setupManagers(self, repo_manager: OnlineRepoManager, local_manager: LocalStorageManager):
+    def setupManagers(
+        self, repo_manager: OnlineRepoManager, local_manager: LocalStorageManager
+    ):
         """
         Sets up the managers for the online and offline views.
 

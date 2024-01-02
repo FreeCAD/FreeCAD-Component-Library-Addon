@@ -1,351 +1,316 @@
-# SPDX-License-Identifier: MIT
-# --------------------------------------------------------------
-# |																|
-# |             Copyright 2023 - 2023, Amulya Paritosh			|
-# |																|
-# |  This file is part of Component Library Plugin for FreeCAD.	|
-# |																|
-# |               This file was created as a part of				|
-# |              Google Summer Of Code Program - 2023			|
-# |																|
-# --------------------------------------------------------------
-
 # -*- coding: utf-8 -*-
 
 ################################################################################
 ## Form generated from reading UI file 'detailed_widget.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.1
+## Created by: Qt User Interface Compiler version 6.6.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide.QtCore import (
-    QCoreApplication,
-    QDate,
-    QDateTime,
-    QLocale,
-    QMetaObject,
-    QObject,
-    QPoint,
-    QRect,
-    QSize,
-    QTime,
-    QUrl,
-    Qt,
-)
-from PySide.QtGui import (
-    QBrush,
-    QColor,
-    QConicalGradient,
-    QCursor,
-    QFont,
-    QFontDatabase,
-    QGradient,
-    QIcon,
-    QImage,
-    QKeySequence,
-    QLinearGradient,
-    QPainter,
-    QPalette,
-    QPixmap,
-    QRadialGradient,
-    QTransform,
-)
-from PySide.QtWidgets import (
-    QApplication,
-    QComboBox,
-    QFrame,
-    QGridLayout,
-    QHBoxLayout,
-    QLabel,
-    QPushButton,
-    QScrollArea,
-    QSizePolicy,
-    QSpacerItem,
-    QTextBrowser,
-    QVBoxLayout,
-    QWidget,
-)
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QComboBox, QFrame,
+    QGridLayout, QHBoxLayout, QLabel, QPushButton,
+    QScrollArea, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
 
-from src.interface.widgets import StarRating
-
+from src.interface.widgets import (AttributeList, StarRating, TagBar)
 
 class Ui_detailedWidget(object):
     def setupUi(self, detailedWidget):
         if not detailedWidget.objectName():
-            detailedWidget.setObjectName("detailedWidget")
-        detailedWidget.resize(1128, 831)
+            detailedWidget.setObjectName(u"detailedWidget")
+        detailedWidget.resize(975, 673)
         self.verticalLayout = QVBoxLayout(detailedWidget)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout.setObjectName(u"verticalLayout")
         self.topArea = QWidget(detailedWidget)
-        self.topArea.setObjectName("topArea")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
+        self.topArea.setObjectName(u"topArea")
+        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.topArea.sizePolicy().hasHeightForWidth())
         self.topArea.setSizePolicy(sizePolicy)
         self.horizontalLayout = QHBoxLayout(self.topArea)
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.backPushButton = QPushButton(self.topArea)
-        self.backPushButton.setObjectName("backPushButton")
+        self.backPushButton.setObjectName(u"backPushButton")
 
         self.horizontalLayout.addWidget(self.backPushButton)
 
-        self.horizontalSpacer = QSpacerItem(
-            807, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum
-        )
+        self.separator = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout.addItem(self.horizontalSpacer)
+        self.horizontalLayout.addItem(self.separator)
 
         self.controlArea = QHBoxLayout()
-        self.controlArea.setObjectName("controlArea")
+        self.controlArea.setObjectName(u"controlArea")
 
         self.horizontalLayout.addLayout(self.controlArea)
 
         self.filetypeComboBox = QComboBox(self.topArea)
-        self.filetypeComboBox.setObjectName("filetypeComboBox")
+        self.filetypeComboBox.setObjectName(u"filetypeComboBox")
 
         self.horizontalLayout.addWidget(self.filetypeComboBox)
 
+
         self.verticalLayout.addWidget(self.topArea)
 
-        self.processesArea = QVBoxLayout()
-        self.processesArea.setObjectName("processesArea")
+        self.componentnameWidget = QWidget(detailedWidget)
+        self.componentnameWidget.setObjectName(u"componentnameWidget")
+        sizePolicy.setHeightForWidth(self.componentnameWidget.sizePolicy().hasHeightForWidth())
+        self.componentnameWidget.setSizePolicy(sizePolicy)
+        self.horizontalLayout_5 = QHBoxLayout(self.componentnameWidget)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.componentLabel = QLabel(self.componentnameWidget)
+        self.componentLabel.setObjectName(u"componentLabel")
+        sizePolicy.setHeightForWidth(self.componentLabel.sizePolicy().hasHeightForWidth())
+        self.componentLabel.setSizePolicy(sizePolicy)
 
-        self.verticalLayout.addLayout(self.processesArea)
+        self.horizontalLayout_5.addWidget(self.componentLabel)
 
-        self.mainScrollArea = QScrollArea(detailedWidget)
-        self.mainScrollArea.setObjectName("mainScrollArea")
-        self.mainScrollArea.setWidgetResizable(True)
-        self.mainScrollAreaWidgetContents = QWidget()
-        self.mainScrollAreaWidgetContents.setObjectName("mainScrollAreaWidgetContents")
-        self.mainScrollAreaWidgetContents.setGeometry(QRect(0, 0, 1112, 755))
-        self.verticalLayout_2 = QVBoxLayout(self.mainScrollAreaWidgetContents)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.labelFrame = QFrame(self.mainScrollAreaWidgetContents)
-        self.labelFrame.setObjectName("labelFrame")
-        sizePolicy.setHeightForWidth(self.labelFrame.sizePolicy().hasHeightForWidth())
-        self.labelFrame.setSizePolicy(sizePolicy)
-        self.labelFrame.setFrameShape(QFrame.Shape.StyledPanel)
-        self.labelFrame.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_2 = QHBoxLayout(self.labelFrame)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.contentLabel = QLabel(self.labelFrame)
-        self.contentLabel.setObjectName("contentLabel")
 
-        self.horizontalLayout_2.addWidget(self.contentLabel, 0, Qt.AlignmentFlag.AlignLeft)
+        self.verticalLayout.addWidget(self.componentnameWidget)
 
-        self.verticalLayout_2.addWidget(self.labelFrame)
-
-        self.thumbnailArea = QWidget(self.mainScrollAreaWidgetContents)
-        self.thumbnailArea.setObjectName("thumbnailArea")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Expanding)
+        self.thumbnailArea = QScrollArea(detailedWidget)
+        self.thumbnailArea.setObjectName(u"thumbnailArea")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.thumbnailArea.sizePolicy().hasHeightForWidth())
         self.thumbnailArea.setSizePolicy(sizePolicy1)
-        self.thumbnailArea.setMinimumSize(QSize(0, 250))
-        self.thumbnailArea.setMaximumSize(QSize(700, 350))
-        self.thumbnailAreaHorizontalLayout = QHBoxLayout(self.thumbnailArea)
-        self.thumbnailAreaHorizontalLayout.setObjectName("thumbnailAreaHorizontalLayout")
+        self.thumbnailArea.setMinimumSize(QSize(0, 200))
+        self.thumbnailArea.setMaximumSize(QSize(16777215, 300))
+        self.thumbnailArea.setLayoutDirection(Qt.LeftToRight)
+        self.thumbnailArea.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.thumbnailArea.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
+        self.thumbnailArea.setWidgetResizable(True)
+        self.thumbnailareaWidget = QWidget()
+        self.thumbnailareaWidget.setObjectName(u"thumbnailareaWidget")
+        self.thumbnailareaWidget.setGeometry(QRect(0, 0, 953, 190))
+        sizePolicy1.setHeightForWidth(self.thumbnailareaWidget.sizePolicy().hasHeightForWidth())
+        self.thumbnailareaWidget.setSizePolicy(sizePolicy1)
+        self.thumbnailareaWidget.setMinimumSize(QSize(0, 100))
+        self.thumbnailareaWidget.setMaximumSize(QSize(16777215, 500))
+        self.thumbnailareaWidget.setLayoutDirection(Qt.LeftToRight)
+        self.thumbnailAreaHorizontalLayout = QHBoxLayout(self.thumbnailareaWidget)
+        self.thumbnailAreaHorizontalLayout.setObjectName(u"thumbnailAreaHorizontalLayout")
+        self.thumbnailArea.setWidget(self.thumbnailareaWidget)
 
-        self.verticalLayout_2.addWidget(self.thumbnailArea, 0, Qt.AlignmentFlag.AlignLeft)
+        self.verticalLayout.addWidget(self.thumbnailArea)
 
-        self.metadataFrame = QFrame(self.mainScrollAreaWidgetContents)
-        self.metadataFrame.setObjectName("metadataFrame")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.metadataFrame.sizePolicy().hasHeightForWidth())
-        self.metadataFrame.setSizePolicy(sizePolicy2)
-        self.metadataFrame.setFrameShape(QFrame.Shape.StyledPanel)
-        self.metadataFrame.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_5 = QHBoxLayout(self.metadataFrame)
-        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        self.descriptionWidget = QWidget(self.metadataFrame)
-        self.descriptionWidget.setObjectName("descriptionWidget")
-        self.verticalLayout_3 = QVBoxLayout(self.descriptionWidget)
-        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.tagsWidget = TagBar(detailedWidget)
+        self.tagsWidget.setObjectName(u"tagsWidget")
+        sizePolicy.setHeightForWidth(self.tagsWidget.sizePolicy().hasHeightForWidth())
+        self.tagsWidget.setSizePolicy(sizePolicy)
+
+        self.verticalLayout.addWidget(self.tagsWidget)
+
+        self.descriptionWidget = QWidget(detailedWidget)
+        self.descriptionWidget.setObjectName(u"descriptionWidget")
+        sizePolicy.setHeightForWidth(self.descriptionWidget.sizePolicy().hasHeightForWidth())
+        self.descriptionWidget.setSizePolicy(sizePolicy)
+        self.horizontalLayout_2 = QHBoxLayout(self.descriptionWidget)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.descriptionLabel = QLabel(self.descriptionWidget)
-        self.descriptionLabel.setObjectName("descriptionLabel")
-        sizePolicy.setHeightForWidth(self.descriptionLabel.sizePolicy().hasHeightForWidth())
-        self.descriptionLabel.setSizePolicy(sizePolicy)
+        self.descriptionLabel.setObjectName(u"descriptionLabel")
 
-        self.verticalLayout_3.addWidget(self.descriptionLabel)
+        self.horizontalLayout_2.addWidget(self.descriptionLabel)
 
-        self.descriptionTextBrowser = QTextBrowser(self.descriptionWidget)
-        self.descriptionTextBrowser.setObjectName("descriptionTextBrowser")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.descriptionTextBrowser.sizePolicy().hasHeightForWidth())
-        self.descriptionTextBrowser.setSizePolicy(sizePolicy3)
 
-        self.verticalLayout_3.addWidget(self.descriptionTextBrowser)
+        self.verticalLayout.addWidget(self.descriptionWidget)
 
-        self.horizontalLayout_5.addWidget(self.descriptionWidget)
-
-        self.saparator = QFrame(self.metadataFrame)
-        self.saparator.setObjectName("saparator")
-        self.saparator.setFrameShape(QFrame.Shape.VLine)
-        self.saparator.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.horizontalLayout_5.addWidget(self.saparator)
-
-        self.metadataWidget = QWidget(self.metadataFrame)
-        self.metadataWidget.setObjectName("metadataWidget")
-        self.metadataWidget.setMouseTracking(False)
-        self.metadataWidget.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.attributeArea = QWidget(detailedWidget)
+        self.attributeArea.setObjectName(u"attributeArea")
+        sizePolicy.setHeightForWidth(self.attributeArea.sizePolicy().hasHeightForWidth())
+        self.attributeArea.setSizePolicy(sizePolicy)
+        self.horizontalLayout_3 = QHBoxLayout(self.attributeArea)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.metadataWidget = QWidget(self.attributeArea)
+        self.metadataWidget.setObjectName(u"metadataWidget")
         self.gridLayout = QGridLayout(self.metadataWidget)
-        self.gridLayout.setObjectName("gridLayout")
-        self.authorLabel = QLabel(self.metadataWidget)
-        self.authorLabel.setObjectName("authorLabel")
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.authorFrame = QFrame(self.metadataWidget)
+        self.authorFrame.setObjectName(u"authorFrame")
+        self.authorFrame.setFrameShape(QFrame.StyledPanel)
+        self.authorFrame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_4 = QVBoxLayout(self.authorFrame)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.authorLabel = QLabel(self.authorFrame)
+        self.authorLabel.setObjectName(u"authorLabel")
+        self.authorLabel.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.authorLabel, 0, 0, 1, 1)
+        self.verticalLayout_4.addWidget(self.authorLabel)
 
-        self.authorValue = QLabel(self.metadataWidget)
-        self.authorValue.setObjectName("authorValue")
+        self.authorValue = QLabel(self.authorFrame)
+        self.authorValue.setObjectName(u"authorValue")
+        self.authorValue.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.authorValue, 0, 1, 1, 1)
+        self.verticalLayout_4.addWidget(self.authorValue)
 
-        self.mainteinerLabel = QLabel(self.metadataWidget)
-        self.mainteinerLabel.setObjectName("mainteinerLabel")
 
-        self.gridLayout.addWidget(self.mainteinerLabel, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.authorFrame, 0, 1, 1, 1)
 
-        self.maintainerValue = QLabel(self.metadataWidget)
-        self.maintainerValue.setObjectName("maintainerValue")
+        self.licenceFrame = QFrame(self.metadataWidget)
+        self.licenceFrame.setObjectName(u"licenceFrame")
+        self.licenceFrame.setFrameShape(QFrame.StyledPanel)
+        self.licenceFrame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_6 = QVBoxLayout(self.licenceFrame)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.licenceLabel = QLabel(self.licenceFrame)
+        self.licenceLabel.setObjectName(u"licenceLabel")
+        self.licenceLabel.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.maintainerValue, 1, 1, 1, 1)
+        self.verticalLayout_6.addWidget(self.licenceLabel)
 
-        self.licenseLabel = QLabel(self.metadataWidget)
-        self.licenseLabel.setObjectName("licenseLabel")
+        self.licenceValue = QLabel(self.licenceFrame)
+        self.licenceValue.setObjectName(u"licenceValue")
+        self.licenceValue.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.licenseLabel, 2, 0, 1, 1)
+        self.verticalLayout_6.addWidget(self.licenceValue)
 
-        self.licenseValue = QLabel(self.metadataWidget)
-        self.licenseValue.setObjectName("licenseValue")
 
-        self.gridLayout.addWidget(self.licenseValue, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.licenceFrame, 0, 4, 1, 1)
 
-        self.createdLabel = QLabel(self.metadataWidget)
-        self.createdLabel.setObjectName("createdLabel")
+        self.maintainerFrame = QFrame(self.metadataWidget)
+        self.maintainerFrame.setObjectName(u"maintainerFrame")
+        self.maintainerFrame.setFrameShape(QFrame.StyledPanel)
+        self.maintainerFrame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_5 = QVBoxLayout(self.maintainerFrame)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.maintainerLabel = QLabel(self.maintainerFrame)
+        self.maintainerLabel.setObjectName(u"maintainerLabel")
+        self.maintainerLabel.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.createdLabel, 3, 0, 1, 1)
+        self.verticalLayout_5.addWidget(self.maintainerLabel)
 
-        self.createdValue = QLabel(self.metadataWidget)
-        self.createdValue.setObjectName("createdValue")
+        self.maintainerValue = QLabel(self.maintainerFrame)
+        self.maintainerValue.setObjectName(u"maintainerValue")
+        self.maintainerValue.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.createdValue, 3, 1, 1, 1)
+        self.verticalLayout_5.addWidget(self.maintainerValue)
 
-        self.updatedLabel = QLabel(self.metadataWidget)
-        self.updatedLabel.setObjectName("updatedLabel")
 
-        self.gridLayout.addWidget(self.updatedLabel, 4, 0, 1, 1)
+        self.gridLayout.addWidget(self.maintainerFrame, 0, 2, 1, 1)
 
-        self.updatedValue = QLabel(self.metadataWidget)
-        self.updatedValue.setObjectName("updatedValue")
+        self.updatedFrame = QFrame(self.metadataWidget)
+        self.updatedFrame.setObjectName(u"updatedFrame")
+        self.updatedFrame.setFrameShape(QFrame.StyledPanel)
+        self.updatedFrame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_2 = QVBoxLayout(self.updatedFrame)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.updatedLabel = QLabel(self.updatedFrame)
+        self.updatedLabel.setObjectName(u"updatedLabel")
+        self.updatedLabel.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.updatedValue, 4, 1, 1, 1)
+        self.verticalLayout_2.addWidget(self.updatedLabel)
 
-        self.ratingLabel = QLabel(self.metadataWidget)
-        self.ratingLabel.setObjectName("ratingLabel")
+        self.updatedValue = QLabel(self.updatedFrame)
+        self.updatedValue.setObjectName(u"updatedValue")
+        self.updatedValue.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.ratingLabel, 5, 0, 1, 1)
+        self.verticalLayout_2.addWidget(self.updatedValue)
 
-        self.ratingwidget = StarRating(self.metadataWidget)
-        self.ratingwidget.setObjectName("ratingwidget")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.ratingwidget.sizePolicy().hasHeightForWidth())
-        self.ratingwidget.setSizePolicy(sizePolicy4)
 
-        self.gridLayout.addWidget(self.ratingwidget, 5, 1, 1, 1, Qt.AlignmentFlag.AlignLeft)
+        self.gridLayout.addWidget(self.updatedFrame, 1, 2, 1, 1)
 
-        self.horizontalLayout_5.addWidget(self.metadataWidget)
+        self.ratingFrame = QFrame(self.metadataWidget)
+        self.ratingFrame.setObjectName(u"ratingFrame")
+        self.ratingFrame.setFrameShape(QFrame.StyledPanel)
+        self.ratingFrame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_8 = QVBoxLayout(self.ratingFrame)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.ratingLabel = QLabel(self.ratingFrame)
+        self.ratingLabel.setObjectName(u"ratingLabel")
+        self.ratingLabel.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_2.addWidget(self.metadataFrame)
+        self.verticalLayout_8.addWidget(self.ratingLabel)
 
-        self.mainScrollArea.setWidget(self.mainScrollAreaWidgetContents)
+        self.ratingWidget = StarRating(self.ratingFrame)
+        self.ratingWidget.setObjectName(u"ratingWidget")
 
-        self.verticalLayout.addWidget(self.mainScrollArea)
+        self.verticalLayout_8.addWidget(self.ratingWidget)
+
+
+        self.gridLayout.addWidget(self.ratingFrame, 1, 4, 1, 1)
+
+        self.createdFrame = QFrame(self.metadataWidget)
+        self.createdFrame.setObjectName(u"createdFrame")
+        self.createdFrame.setFrameShape(QFrame.StyledPanel)
+        self.createdFrame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_7 = QVBoxLayout(self.createdFrame)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.createdLabel = QLabel(self.createdFrame)
+        self.createdLabel.setObjectName(u"createdLabel")
+        self.createdLabel.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_7.addWidget(self.createdLabel)
+
+        self.createdValue = QLabel(self.createdFrame)
+        self.createdValue.setObjectName(u"createdValue")
+        self.createdValue.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_7.addWidget(self.createdValue)
+
+
+        self.gridLayout.addWidget(self.createdFrame, 1, 1, 1, 1)
+
+
+        self.horizontalLayout_3.addWidget(self.metadataWidget)
+
+        self.scrollArea = QScrollArea(self.attributeArea)
+        self.scrollArea.setObjectName(u"scrollArea")
+        sizePolicy1.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
+        self.scrollArea.setSizePolicy(sizePolicy1)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 461, 126))
+        self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.attributeList = AttributeList(self.scrollAreaWidgetContents)
+        self.attributeList.setObjectName(u"attributeList")
+        sizePolicy1.setHeightForWidth(self.attributeList.sizePolicy().hasHeightForWidth())
+        self.attributeList.setSizePolicy(sizePolicy1)
+
+        self.verticalLayout_3.addWidget(self.attributeList)
+
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+
+        self.horizontalLayout_3.addWidget(self.scrollArea)
+
+
+        self.verticalLayout.addWidget(self.attributeArea)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Minimum)
+
+        self.verticalLayout.addItem(self.verticalSpacer)
+
 
         self.retranslateUi(detailedWidget)
 
-        self.filetypeComboBox.setCurrentIndex(-1)
-
         QMetaObject.connectSlotsByName(detailedWidget)
-
     # setupUi
 
     def retranslateUi(self, detailedWidget):
-        detailedWidget.setWindowTitle(QCoreApplication.translate("detailedWidget", "Form", None))
-        self.backPushButton.setText(QCoreApplication.translate("detailedWidget", "Back", None))
-        self.filetypeComboBox.setPlaceholderText(
-            QCoreApplication.translate("detailedWidget", "filetype", None)
-        )
-        self.contentLabel.setText(
-            QCoreApplication.translate(
-                "detailedWidget",
-                '<html><head/><body><p><span style=" font-size:28pt;">Component Label</span></p></body></html>',
-                None,
-            )
-        )
-        self.descriptionLabel.setText(
-            QCoreApplication.translate(
-                "detailedWidget",
-                '<html><head/><body><p><span style=" font-size:18pt;">Description :</span></p></body></html>',
-                None,
-            )
-        )
-        self.authorLabel.setText(
-            QCoreApplication.translate(
-                "detailedWidget",
-                '<html><head/><body><p><span style=" font-size:14pt;">Author:</span></p></body></html>',
-                None,
-            )
-        )
-        self.authorValue.setText("")
-        self.mainteinerLabel.setText(
-            QCoreApplication.translate(
-                "detailedWidget",
-                '<html><head/><body><p><span style=" font-size:14pt;">Maintainer:</span></p></body></html>',
-                None,
-            )
-        )
-        self.maintainerValue.setText("")
-        self.licenseLabel.setText(
-            QCoreApplication.translate(
-                "detailedWidget",
-                '<html><head/><body><p><span style=" font-size:14pt;">License:</span></p></body></html>',
-                None,
-            )
-        )
-        self.licenseValue.setText("")
-        self.createdLabel.setText(
-            QCoreApplication.translate(
-                "detailedWidget",
-                '<html><head/><body><p><span style=" font-size:14pt;">Created on:</span></p></body></html>',
-                None,
-            )
-        )
-        self.createdValue.setText("")
-        self.updatedLabel.setText(
-            QCoreApplication.translate(
-                "detailedWidget",
-                '<html><head/><body><p><span style=" font-size:14pt;">Upadted on:</span></p></body></html>',
-                None,
-            )
-        )
-        self.updatedValue.setText("")
-        self.ratingLabel.setText(
-            QCoreApplication.translate(
-                "detailedWidget",
-                '<html><head/><body><p><span style=" font-size:14pt;">Rating:</span></p></body></html>',
-                None,
-            )
-        )
-
+        detailedWidget.setWindowTitle(QCoreApplication.translate("detailedWidget", u"Form", None))
+        self.backPushButton.setText(QCoreApplication.translate("detailedWidget", u"Back", None))
+        self.componentLabel.setText(QCoreApplication.translate("detailedWidget", u"Component_Name", None))
+        self.descriptionLabel.setText(QCoreApplication.translate("detailedWidget", u"Here is a way to improve your vocabulary. Check out the words for the day and a small quiz to work up your mind.", None))
+        self.authorLabel.setText(QCoreApplication.translate("detailedWidget", u"Author", None))
+        self.authorValue.setText(QCoreApplication.translate("detailedWidget", u"TextLabel", None))
+        self.licenceLabel.setText(QCoreApplication.translate("detailedWidget", u"Licence", None))
+        self.licenceValue.setText(QCoreApplication.translate("detailedWidget", u"TextLabel", None))
+        self.maintainerLabel.setText(QCoreApplication.translate("detailedWidget", u"Maintainer", None))
+        self.maintainerValue.setText(QCoreApplication.translate("detailedWidget", u"TextLabel", None))
+        self.updatedLabel.setText(QCoreApplication.translate("detailedWidget", u"Updated_on ", None))
+        self.updatedValue.setText(QCoreApplication.translate("detailedWidget", u"TextLabel", None))
+        self.ratingLabel.setText(QCoreApplication.translate("detailedWidget", u"Rating", None))
+        self.createdLabel.setText(QCoreApplication.translate("detailedWidget", u"Created_on", None))
+        self.createdValue.setText(QCoreApplication.translate("detailedWidget", u"TextLabel", None))
     # retranslateUi
+

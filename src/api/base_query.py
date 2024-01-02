@@ -26,7 +26,7 @@ class ComponentQueryInterface(ABC):
         Abstract property representing the page number or query parameter for pagination.
     page_size : QueryParam
         Abstract property representing the page size or query parameter for pagination.
-    search_key : QueryParam
+    search_str : QueryParam
         Abstract property representing the search key or query parameter for searching components.
     sort_by : QueryParam
         Abstract property representing the sort key or query parameter for sorting components.
@@ -51,7 +51,7 @@ class ComponentQueryInterface(ABC):
         ...
 
     @abstractproperty
-    def search_key(self) -> QueryParam:
+    def search_str(self) -> QueryParam:
         """Abstract property representing the search key or query parameter for searching components."""
         ...
 

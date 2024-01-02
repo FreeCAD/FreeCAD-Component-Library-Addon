@@ -26,7 +26,7 @@ class RepoComponentQuery(ComponentQueryInterface):
         """
         self.__page: int | None = 1
         self.__page_size: int | None = 18
-        self.__search_key: str | None = None
+        self.__search_str: str | None = None
         self.__sort_by: str | None = "name"
         self.__sort_ord: str | None = "asc"
         self.__file_types: list[str] | None = None
@@ -50,12 +50,12 @@ class RepoComponentQuery(ComponentQueryInterface):
         self.__page_size = value
 
     @property
-    def search_key(self) -> str:
-        return "" if self.__search_key is None else f"search_key={self.__search_key}"
+    def search_str(self) -> str:
+        return "" if self.__search_str is None else f"search_str={self.__search_str}"
 
-    @search_key.setter
-    def search_key(self, value: str | None) -> None:
-        self.__search_key = value
+    @search_str.setter
+    def search_str(self, value: str | None) -> None:
+        self.__search_str = value
 
     @property
     def sort_by(self) -> str:
@@ -95,7 +95,9 @@ class RepoComponentQuery(ComponentQueryInterface):
     def file_types(self) -> str:
         if self.__file_types is None or len(self.__file_types) == 0:
             return ""
-        return "&".join(f"file_types%5B%5D={ft.replace(' ', '%20')}" for ft in self.__file_types)
+        return "&".join(
+            f"file_types%5B%5D={ft.replace(' ', '%20')}" for ft in self.__file_types
+        )
 
     @file_types.setter
     def file_types(self, value: list[str] | None) -> None:
@@ -119,7 +121,9 @@ class RepoComponentQuery(ComponentQueryInterface):
     def columns(self) -> str:
         if self.__columns is None or len(self.__columns) == 0:
             return ""
-        return "&".join(f"columns%5B%5D={t.replace(' ', '%20')}" for t in self.__columns)
+        return "&".join(
+            f"columns%5B%5D={t.replace(' ', '%20')}" for t in self.__columns
+        )
 
     @columns.setter
     def columns(self, value: list[str] | None) -> None:

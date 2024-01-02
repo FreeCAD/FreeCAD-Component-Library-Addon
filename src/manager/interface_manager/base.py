@@ -10,7 +10,7 @@
 # |																|
 # --------------------------------------------------------------
 
-from PySide.QtCore import Signal
+from PySide6.QtCore import Signal
 
 from ...api import ApiInterface, ComponentQueryInterface
 from ...utils import ABCQObject
@@ -42,13 +42,13 @@ class ManagerInterface(ABCQObject):
         Method to load the previous page of data.
         """
 
-    def search(self, search_key: str):
+    def search(self, search_str: str):
         """
-        Method to search for components using the given search_key.
+        Method to search for components using the given search_str.
 
         Parameters
         ----------
-        search_key : str
+        search_str : str
             the component name to search
         """
 

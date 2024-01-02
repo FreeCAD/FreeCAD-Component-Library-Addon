@@ -10,14 +10,12 @@
 # |																|
 # --------------------------------------------------------------
 
-from PySide.QtGui import QFont
-from PySide.QtWidgets import QWidget
-from PySide.QtCore import Slot
+from PySide6.QtCore import Slot
+from PySide6.QtWidgets import QWidget
 
 from ....data import Component, File, FileTypes
-from ...widgets import DetailedWidget, Thumbnail
+from ...widgets import ComponentItem, DetailedWidget, Thumbnail
 from ..base_view import BaseView
-from ...widgets import ComponentItem, Thumbnail
 
 
 class BaseDetailedView(BaseView):
@@ -59,14 +57,7 @@ class BaseDetailedView(BaseView):
         """
         self.ui.setupUi(self)
         self.ui.backPushButton.clicked.connect(self.backPushButton_click)
-        self.ui.contentLabel.setFont(QFont("Arial", 28))
-        font_14 = QFont("Arial", 14)
-        self.ui.descriptionTextBrowser.setFont(font_14)
-        self.ui.authorValue.setFont(font_14)
-        self.ui.licenseValue.setFont(font_14)
-        self.ui.maintainerValue.setFont(font_14)
-        self.ui.createdValue.setFont(font_14)
-        self.ui.updatedValue.setFont(font_14)
+        self.ui.tagsWidget.set_editable(False)
 
     @Slot()
     def backPushButton_click(self) -> None:
@@ -78,7 +69,7 @@ class BaseDetailedView(BaseView):
         None
         """
 
-        self.manager.reload_page()
+        # self.manager.reload_page()
         self.topLevelWidget().toLastWidget()
 
     def addControlWidget(self, widget: QWidget) -> None:
@@ -140,7 +131,7 @@ class BaseDetailedView(BaseView):
         """
 
         txt = self.ui.filetypeComboBox.currentText()
-        # TODO Check why txt produces empty string
+        # TODO : Check why txt produces empty string
         if txt and FileTypes(txt):
             return self.component.files.get(FileTypes(txt))
         # ! should not return None. Investigate
@@ -164,14 +155,18 @@ class BaseDetailedView(BaseView):
         self._update_thumbnail(comp_item.ui.thumbnail)
         self._update_filetype_combobox()
 
-        self.ui.contentLabel.setText(self.component.metadata.name)
-        self.ui.descriptionTextBrowser.setText(self.component.metadata.description)
+        self.ui.componentLabel.setText(self.component.metadata.name)
+        self.ui.descriptionLabel.setText(self.component.metadata.description)
         self.ui.authorValue.setText(self.component.metadata.author)
         self.ui.maintainerValue.setText(self.component.metadata.maintainer)
         self.ui.createdValue.setText(self.component.metadata.created_at)
         self.ui.updatedValue.setText(self.component.metadata.updated_at)
-        self.ui.ratingwidget.setRating(self.component.metadata.rating)
-        self.ui.licenseValue.setText(self.component.license.fullname)
+        self.ui.ratingWidget.setRating(self.component.metadata.rating)
+        self.ui.licenceValue.setText(self.component.license.fullname)
+        self.ui.attributeList.update_attributes(self.component.attributes)
+        self.ui.tagsWidget.clear()
+        for tag in self.component.tags:
+            self.ui.tagsWidget.add_tag_to_bar(tag.label)
 
     def _update_thumbnail(self, thumbnail_widget) -> None:
         """
