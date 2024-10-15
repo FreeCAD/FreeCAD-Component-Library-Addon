@@ -12,9 +12,10 @@
 
 import contextlib
 from enum import Enum
+from typing import Union
 
-from PySide6.QtCore import Slot
-from PySide6.QtWidgets import QPushButton
+from PySide2.QtCore import Slot
+from PySide2.QtWidgets import QPushButton
 
 
 class StatefulPushButton(QPushButton):
@@ -29,7 +30,9 @@ class StatefulPushButton(QPushButton):
         super().__init__(parent)
         self.states = {}
 
-    def register_state(self, state: Enum, slot: Slot | None, text: str, enable: bool):
+    def register_state(
+        self, state: Enum, slot: Union[Slot, None], text: str, enable: bool
+    ):
         """
         Register a button state along with its properties.
 

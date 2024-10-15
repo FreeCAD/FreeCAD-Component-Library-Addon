@@ -1,32 +1,42 @@
 # SPDX-License-Identifier: MIT
 # --------------------------------------------------------------
-# |																|
-# |             Copyright 2023 - 2023, Amulya Paritosh			|
-# |																|
-# |  This file is part of Component Library Plugin for FreeCAD.	|
-# |																|
-# |               This file was created as a part of				|
-# |              Google Summer Of Code Program - 2023			|
-# |																|
+# ,																|
+# ,             Copyright 2023 - 2023, Amulya Paritosh			|
+# ,																|
+# ,  This file is part of Component Library Plugin for FreeCAD.	|
+# ,																|
+# ,               This file was created as a part of				|
+# ,              Google Summer Of Code Program - 2023			|
+# ,																|
 # --------------------------------------------------------------
 
 import json
 from dataclasses import InitVar, dataclass, field
-from importlib import metadata
-from typing import Any, Literal, TypedDict
+from functools import wraps
+from typing import Any, Dict, List, Literal, Union
 
 from .data_types import DTypes, FileTypes
 from .factory import DataFactory
 
 
-@dataclass(kw_only=True)
+def kwargs_only(cls):
+
+    @wraps(cls)
+    def call(**kwargs):
+        return cls(**kwargs)
+
+    return call
+
+
+# @kwargs_only
+@dataclass
 class _Data(DataFactory, dtype=None):
     """
     Represents a data object with optional attributes.
     This Class is not suposed to be initialized directly, but is a base for the main DataClases.
     """
 
-    dtype: InitVar[DTypes | None] = None
+    dtype: InitVar[Union[DTypes, None]] = None
     id: str = None
     created_at: str = None
     updated_at: str = None
@@ -35,7 +45,8 @@ class _Data(DataFactory, dtype=None):
         ...
 
 
-@dataclass(kw_only=True)
+# @kwargs_only
+@dataclass
 class File(_Data, dtype=DTypes.FILE):
     """
     File class represents a file with metadata.
@@ -90,7 +101,8 @@ class File(_Data, dtype=DTypes.FILE):
             self.type = FileTypes(self.type)
 
 
-@dataclass(kw_only=True)
+# @kwargs_only
+@dataclass
 class License(_Data, dtype=DTypes.LICENSE):
     """
     License class represents a license with metadata.
@@ -129,7 +141,8 @@ class License(_Data, dtype=DTypes.LICENSE):
     osi_approved: bool = False
 
 
-@dataclass(kw_only=True)
+# @kwargs_only
+@dataclass
 class Metadata(_Data, dtype=DTypes.METADATA):
     """
     Metadata class represents metadata information.
@@ -171,6 +184,7 @@ class Metadata(_Data, dtype=DTypes.METADATA):
     """
 
     license_id: str = None
+    user_id: str = None
     name: str = None
     author: str = None
     maintainer: str = None
@@ -180,7 +194,8 @@ class Metadata(_Data, dtype=DTypes.METADATA):
     version: str = None
 
 
-@dataclass(kw_only=True)
+# @kwargs_only
+@dataclass
 class Tag(_Data, dtype=DTypes.TAG):
     """
     Tag class represents a tag.
@@ -203,14 +218,16 @@ class Tag(_Data, dtype=DTypes.TAG):
     label: str = ""
 
 
-@dataclass(kw_only=True)
+# @kwargs_only
+@dataclass
 class Attribute(_Data, dtype=DTypes.ATTRIBUTE):
     key: str = ""
     value: str = ""
     metadata_id: str = ""
 
 
-@dataclass(kw_only=True)
+# @kwargs_only
+@dataclass
 class Component(DataFactory, dtype=DTypes.COMPONENT):
     """
     Component class represents a component.
@@ -225,11 +242,11 @@ class Component(DataFactory, dtype=DTypes.COMPONENT):
         The ID of the component.
     metadata : Metadata, optional
         The metadata of the component.
-    files : dict[FileTypes, File], optional
+    files : Dict[FileTypes, File], optional
         The files associated with the component.
     license : License, optional
         The license of the component.
-    tags : list[Tag], optional
+    tags : List[Tag], optional
         The tags associated with the component.
 
     Methods
@@ -257,13 +274,13 @@ class Component(DataFactory, dtype=DTypes.COMPONENT):
     component.serialize()
     """
 
-    dtype: InitVar[DTypes | None] = None
+    dtype: InitVar[Union[DTypes, None]] = None
     id: str = ""
     metadata: Metadata = None
-    files: dict[FileTypes, File] = field(default_factory=dict)
+    files: Dict[FileTypes, File] = field(default_factory=dict)
     license: License = None
-    tags: list[Tag] = field(default_factory=list)
-    attributes: list[Attribute] = field(default_factory=list)
+    tags: List[Tag] = field(default_factory=list)
+    attributes: List[Attribute] = field(default_factory=list)
 
     def __post_init__(self, *args, **kwargs):
         """
@@ -309,7 +326,7 @@ class Component(DataFactory, dtype=DTypes.COMPONENT):
             data_list=self.attributes, dtype=DTypes.ATTRIBUTE
         )
 
-    def serialize(self) -> dict[str, Any]:
+    def serialize(self) -> Dict[str, Any]:
         """
         Post-initialization method for Component objects.
 
@@ -349,13 +366,13 @@ class DataJsonEncoder(json.JSONEncoder):
 
     Returns
     -------
-    Union[dict[str, Any], Any, Literal['stl', 'fcstd', 'fcstd1', 'step', 'stp']]
+    Union[Dict[str, Any], Any, Literal['stl', 'fcstd', 'fcstd1', 'step', 'stp']]
         The serialized object.
     """
 
     def default(
         self, obj: Any
-    ) -> dict[str, Any] | Any | Literal["stl", "fcstd", "fcstd1", "step", "stp"]:
+    ) -> Union[Dict[str, Any], Any, Literal["stl", "fcstd", "fcstd1", "step", "stp"]]:
         """
         Serializes the given object based on its type.
 
@@ -366,7 +383,7 @@ class DataJsonEncoder(json.JSONEncoder):
 
         Returns
         -------
-        Union[dict[str, Any], Any, Literal['stl', 'fcstd', 'fcstd1', 'step', 'stp']]
+        Union[Dict[str, Any], Any, Literal['stl', 'fcstd', 'fcstd1', 'step', 'stp']]
             The serialized object.
 
         """
@@ -378,4 +395,17 @@ class DataJsonEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-SerialisedDataType = Component | Tag | Metadata | License | File
+SerialisedDataType = Union[Component, Tag, Metadata, License, File]
+
+
+@dataclass
+class User:
+    username: str
+    name: str
+    email: str
+    avatar_url: str
+    components: List[Component]
+
+    @classmethod
+    def empty_user(cls):
+        return cls(username="", name="", email="", avatar_url="", components=[])

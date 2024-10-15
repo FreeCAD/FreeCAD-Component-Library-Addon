@@ -10,27 +10,27 @@
 # |																|
 # --------------------------------------------------------------
 
-from functools import cache
+from functools import lru_cache
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict, List, cast
 
-from PySide6.QtCore import QEventLoop, Signal, Slot
-from PySide6.QtNetwork import QNetworkRequest
+from PySide2.QtCore import QEventLoop, Signal, Slot, SignalInstance
+from PySide2.QtNetwork import QNetworkRequest
 
-from ...api.cms_api import (
+from ..api_manager.cms_api import (
     CMSApi,
     CMSReply,
     ComponentRequest,
     RepoComponentQuery,
     construct_multipart,
 )
-from ...api.local_api import LocalApi
+from ..api_manager.local_api import LocalApi
 from ...config import Config
 from ...data import Component, DataFactory, DTypes, FileTypes, SerialisedDataType
 from ..download_manager import FileDownloader
 from ..page_manager import PageStates
 from .base import ManagerInterface
-
+from ...logging import logging
 
 class OnlineRepoManager(ManagerInterface):
     """
@@ -38,7 +38,7 @@ class OnlineRepoManager(ManagerInterface):
 
     """
 
-    component_loaded = Signal()
+    component_loaded = cast(SignalInstance, Signal())
     api: CMSApi
 
     query: RepoComponentQuery = RepoComponentQuery()
@@ -116,6 +116,7 @@ class OnlineRepoManager(ManagerInterface):
             network reply from API
         """
         self.query.search_str = search_str
+        self.query.sort_ord = "descending"
         return self.reload_page()
 
     def sort(self, /, by: str, order: str) -> CMSReply:
@@ -138,15 +139,15 @@ class OnlineRepoManager(ManagerInterface):
         self.query.sort_ord = order
         return self.reload_page()
 
-    def filter(self, /, filetypes: list[str], tags: list[str]) -> CMSReply:
+    def filter(self, /, filetypes: List[str], tags: List[str]) -> CMSReply:
         """
         Filters the components by filetype and tags
 
         Parameters
         ----------
-        filetypes : list[str]
+        filetypes : List[str]
             filetypes to filter with
-        tags : list[str]
+        tags : List[str]
             tags to filter with
 
         Returns
@@ -201,7 +202,7 @@ class OnlineRepoManager(ManagerInterface):
 
         return component_downloader
 
-    def create_component(self, data: dict) -> CMSReply | None:
+    def create_component(self, data: dict) -> CMSReply:
         """
         Create a component. This is a POST request.
 
@@ -218,10 +219,12 @@ class OnlineRepoManager(ManagerInterface):
         """
         multi_part = construct_multipart(data)
 
-        if not multi_part:
-            return
+        # if not multi_part:
+        #     return
 
         request = ComponentRequest()
+        logging.debug(f"{Config.JWT_TOKEN}")
+        request.setRawHeader("Token".encode(), Config.JWT_TOKEN.encode())
         request.setRawHeader(
             "X-Access-Token".encode(), Config.GITHUB_ACCESS_TOKEN.encode()
         )
@@ -229,8 +232,8 @@ class OnlineRepoManager(ManagerInterface):
         multi_part.setParent(reply)
         return reply
 
-    @cache
-    def load_from_db(self, dtype: DTypes) -> list[SerialisedDataType]:
+    @lru_cache
+    def load_from_db(self, dtype: DTypes) -> List[SerialisedDataType]:
         """
         Load data from the database
 
@@ -241,19 +244,19 @@ class OnlineRepoManager(ManagerInterface):
 
         Returns
         -------
-        list[SerialisedDataType]|None
+        List[SerialisedDataType]|None
             serialised data from db
         """
         return DataFactory.load_many(DbDataLoader(dtype).data, dtype)
 
     @Slot(dict)
-    def __component_response_handler(self, json_data: dict[str, Any]) -> None:
+    def __component_response_handler(self, json_data: Dict[str, Any]) -> None:
         """
         Handles what happens when the API responds with data
 
         Parameters
         ----------
-        json_data : dict[str, Any]
+        json_data : Dict[str, Any]
             The response json dict.
         """
         self.page_states.load_page(json_data)
@@ -292,7 +295,7 @@ class DbDataLoader:
         reply: CMSReply = CMSApi().read(QNetworkRequest(self.get_route(dtype)))
         loop = QEventLoop(parent=reply)
         reply.finished.connect(loop.quit)
-        loop.exec()
+        loop.exec_()
         self.data: list = reply.data.get("items", [])
 
     @staticmethod
@@ -310,10 +313,9 @@ class DbDataLoader:
         str
             relative route.
         """
-        match dtype:
-            case DTypes.TAG:
-                return "tag"
-            case DTypes.LICENSE:
-                return "license"
-            case _:
-                return ""
+        if dtype == DTypes.TAG:
+            return "tag"
+        elif dtype == DTypes.LICENSE:
+            return "license"
+        else:
+            return ""

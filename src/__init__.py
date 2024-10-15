@@ -9,5 +9,3 @@
 # |              Google Summer Of Code Program - 2023			|
 # |																|
 # --------------------------------------------------------------
-
-from .main import Window

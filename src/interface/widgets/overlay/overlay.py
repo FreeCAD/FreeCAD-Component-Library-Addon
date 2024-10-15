@@ -10,9 +10,9 @@
 # |																|
 # --------------------------------------------------------------
 
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QFont, QPainter
-from PySide6.QtWidgets import QGraphicsBlurEffect, QWidget
+from PySide2.QtCore import Qt
+from PySide2.QtGui import QFont, QPainter
+from PySide2.QtWidgets import QGraphicsBlurEffect, QWidget
 
 
 class Overlay(QWidget):

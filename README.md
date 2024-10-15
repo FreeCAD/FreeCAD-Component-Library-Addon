@@ -21,6 +21,25 @@ The Component Library Plugin is a PySide6 application designed to enhance FreeCA
 
 ## Dependencies
 1. python = ">=3.10,<3.12"
-2. pyside6 = "^6.5.1.1"
+2. PySide6 = "^6.5.1.1"
 3. certifi = "^2023.5.7"
 4. python-dotenv = "^1.0.0"
+
+## Development TODOs:
+
+1. [ ] Add downloaded components to document
+	1. [x] add to document button
+	1. [x] add functionality to insert component to the active FreeCAD document
+	1. [ ] BUG: only able to add step files. all other files gives error
+1. [x] new window every time we go to the workbench
+1. [x] upload path default to the user_dir
+1. [x] change upload dialog to a widget in the main window
+1. [ ] test upload
+1. [ ] BUG: resolve remove attribute button error
+1. [x] remove download button from grid view item
+1. [ ] UI updates
+	1. [ ] add user profile section
+	1. [ ] ui revamp (responsive ui, proper scaling)
+1. [ ] Manage configurations
+	1. [ ] managing configs with freecad parameters
+	1. [ ] add configurations to the backend

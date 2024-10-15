@@ -3,7 +3,8 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
+from pathlib import Path
 
-import FreeCad
+import FreeCAD
 
-FreeCad.__unit_test__ += ["TestComponentLibraryAddon"]
+# FreeCAD.__unit_test__ += ["TestComponentLibraryAddon"]

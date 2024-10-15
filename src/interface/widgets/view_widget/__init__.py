@@ -10,5 +10,4 @@
 # |																|
 # --------------------------------------------------------------
 
-from .detail_widget import DetailedWidget
-from .grid_widget import GridItemWidget
+from .detail_view import OnlineDetailedView, LocalDetailedView

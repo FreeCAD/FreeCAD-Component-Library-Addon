@@ -10,13 +10,13 @@
 # |																|
 # --------------------------------------------------------------
 
-from typing import Any
+from typing import Any, List, Union, cast
 
-from PySide6.QtCore import Signal
+from PySide2.QtCore import Signal, SignalInstance
 
 from src.data.factory import DataFactory
 
-from ...api.local_api import LocalApi, LocalComponentQuery
+from ..api_manager.local_api import LocalApi, LocalComponentQuery
 from ...data import Component, DTypes, FileTypes, SerialisedDataType
 from ..page_manager import PageStates
 from .base import ManagerInterface
@@ -27,7 +27,7 @@ class LocalStorageManager(ManagerInterface):
     Manager for the local Storage and functions. Abstracts the interaction with the LocalAPI.
     """
 
-    component_loaded = Signal()
+    component_loaded = cast(SignalInstance, Signal())
     api: LocalApi
 
     page_states = PageStates()
@@ -53,7 +53,7 @@ class LocalStorageManager(ManagerInterface):
         """
         return self.request_components()
 
-    def load_from_db(self, dtype: DTypes) -> list[SerialisedDataType] | None:
+    def load_from_db(self, dtype: DTypes) -> Union[List[SerialisedDataType], None]:
         """
         Load data from the Local database
 
@@ -64,12 +64,12 @@ class LocalStorageManager(ManagerInterface):
 
         Returns
         -------
-        list[SerialisedDataType]|None
+        List[SerialisedDataType]|None
             serialised data from db
         """
-        match dtype:
-            case DTypes.TAG:
-                return DataFactory.load_many(self.api.get_tags(), dtype)
+
+        if dtype == DTypes.TAG:
+            return DataFactory.load_many(self.api.get_tags(), dtype)
 
     def remove_file(self, component: Component, filetype: FileTypes):
         """

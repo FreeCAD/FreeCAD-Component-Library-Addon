@@ -12,9 +12,11 @@
 
 from __future__ import annotations
 
-from PySide6.QtCore import Qt, QUrl
-from PySide6.QtGui import QImage, QPixmap
-from PySide6.QtWidgets import QLabel, QSizePolicy, QWidget
+from typing import Union
+
+from PySide2.QtCore import Qt, QUrl
+from PySide2.QtGui import QImage, QPixmap
+from PySide2.QtWidgets import QLabel, QSizePolicy, QWidget
 
 from ....manager.download_manager import ImageLoader
 
@@ -24,7 +26,7 @@ class Thumbnail(QLabel):
     Custom QLabel class for displaying image thumbnails.
     """
 
-    def __init__(self, parent: QWidget, url: str | None = None) -> None:
+    def __init__(self, parent: QWidget, url: Union[str, None] = None) -> None:
         """
         Constructor to initialize the Thumbnail.
 

@@ -13,7 +13,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, is_dataclass
-from typing import TYPE_CHECKING, Any, Callable
+from typing import TYPE_CHECKING, Any, Callable, Dict, List
 
 from .data_types import DTypes
 
@@ -27,7 +27,7 @@ class DataFactory:
 
     Attributes
     ----------
-    _registry : dict[DTypes, SerialisedDataType]
+    _registry : Dict[DTypes, SerialisedDataType]
         A dictionary that maps dtype to the corresponding data object class.
 
     Examples
@@ -37,7 +37,7 @@ class DataFactory:
     factory.load_many(data_list=[data1, data2], dtype=DTypes.FILE)
     """
 
-    _registry: dict[DTypes, SerialisedDataType] = {}
+    _registry: Dict[DTypes, SerialisedDataType] = {}
 
     def __init__(self) -> None:
         """
@@ -78,7 +78,7 @@ class DataFactory:
         cls._registry[dtype] = cls
 
     @classmethod
-    def create(cls, dtype: DTypes, **kwargs: dict[str, Any]) -> SerialisedDataType:
+    def create(cls, dtype: DTypes, **kwargs: Dict[str, Any]) -> SerialisedDataType:
         """
         Creates a data object of the specified dtype with the provided keyword arguments.
 
@@ -88,7 +88,7 @@ class DataFactory:
             The class.
         dtype : DTypes
             The dtype associated with the data object.
-        **kwargs : dict[str, Any]
+        **kwargs : Dict[str, Any]
             Additional keyword arguments for initializing the data object.
 
         Returns
@@ -147,7 +147,7 @@ class DataFactory:
         return asdict(self)
 
     @staticmethod
-    def load_many(data_list: list, dtype: DTypes) -> list[SerialisedDataType]:
+    def load_many(data_list: list, dtype: DTypes) -> List[SerialisedDataType]:
         """
         Create and load multiple data objects from a list of dictionaries.
 
@@ -160,7 +160,7 @@ class DataFactory:
 
         Returns
         -------
-        list[SerialisedDataType]
+        List[SerialisedDataType]
             A list of loaded data objects.
         """
 

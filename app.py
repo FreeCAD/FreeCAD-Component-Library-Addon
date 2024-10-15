@@ -1,4 +1,4 @@
-#!.venv/bin/python
+#!/usr/bin/python3
 
 # SPDX-License-Identifier: MIT
 # --------------------------------------------------------------
@@ -15,13 +15,12 @@
 
 import sys
 
-from PySide6.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication
+from PySide2 import QtCore
+from src.main import independent_local_dev_app
 
-from src import Window
-
-app = QApplication(sys.argv)
-
-# TODO: Instantiate the Window class from the 'src' module
-plugin = Window()
-
-sys.exit(app.exec())
+if __name__ == "__main__":
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
+    app = QApplication(sys.argv)
+    addon = independent_local_dev_app()
+    sys.exit(app.exec_())

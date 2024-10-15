@@ -10,9 +10,17 @@
 # |																|
 # --------------------------------------------------------------
 
-from PySide6.QtCore import Signal
+from typing import List, cast
 
-from ...api import ApiInterface, ComponentQueryInterface
+from PySide2.QtCore import Signal, SignalInstance
+
+import FreeCAD
+import FreeCADGui
+
+from src.data.data_types import FileTypes
+from src.data.datadef import Component
+
+from ..api_manager import ApiInterface, ComponentQueryInterface, local_api
 from ...utils import ABCQObject
 from ..page_manager import PageStates
 
@@ -22,7 +30,7 @@ class ManagerInterface(ABCQObject):
     Abstract class for managenent of APIs. It abstracts the interactions with the API.
     """
 
-    component_loaded: Signal
+    component_loaded: cast(SignalInstance, Signal)
     api: ApiInterface
     page_states: PageStates
     query: ComponentQueryInterface
@@ -64,14 +72,27 @@ class ManagerInterface(ABCQObject):
             sorting order
         """
 
-    def filter(self, /, filetypes: list[str], tags: list[str]):
+    def filter(self, /, filetypes: List[str], tags: List[str]):
         """
         Method to filter components based on filetypes and tags.
 
         Parameters
         ----------
-        filetypes : list[str]
+        filetypes : List[str]
             filetypes to filter
-        tags : list[str]
+        tags : List[str]
             tags to filter
         """
+
+    def insert_in_active_freecad_doc(self, component: Component, filetype: FileTypes):
+        file_path = local_api.LocalApi().file_path(component.metadata.name, filetype)
+        current_document = FreeCAD.activeDocument()
+        if current_document is None:
+            raise ValueError("No active document found.")
+        FreeCADGui.insert(str(file_path), current_document.Name)
+        return file_path
+
+    def insert_in_new_freecad_doc(self, component: Component, filetype: FileTypes):
+        FreeCAD.newDocument()
+        file_path = self.insert_in_active_freecad_doc(component, filetype)
+        return file_path

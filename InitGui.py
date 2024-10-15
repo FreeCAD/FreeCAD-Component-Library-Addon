@@ -9,22 +9,22 @@ import FreeCADGui
 
 
 class ComponentLibraryWorkbench(Workbench):
-    def __init__(self):
-        FreeCAD.Console.PrintLog("Logging Test here\n")
-        FreeCAD.Console.PrintWarning("Warning Logging Test here\n")
-        FreeCAD.Console.PrintError("Error Logging Test here\n")
 
-        self.__class__.Icon = FreeCAD.getResourceDir() + ""
+    def __init__(self):
         self.__class__.MenuText = "ComponentLibrary"
         self.__class__.ToolTip = "ComponentLibrary workbench"
 
     def Initialize(self) -> None:
-        from src import Window
+        from src.main import freecad_local_dev_app
 
-        plugin = Window()
+        self.addon = freecad_local_dev_app()
+        self.addon.show()
 
     def Activated(self):
-        ...
+        self.addon.show()
+
+    def Deactivated(self):
+        self.addon.hide()
 
     def GetClassName(self):
         return "Gui::PythonWorkbench"

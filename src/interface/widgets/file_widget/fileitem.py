@@ -11,8 +11,9 @@
 # --------------------------------------------------------------
 
 from pathlib import Path
+from typing import List
 
-from PySide6.QtWidgets import (
+from PySide2.QtWidgets import (
     QFileDialog,
     QFrame,
     QHBoxLayout,
@@ -31,12 +32,13 @@ class FileItem(QFrame):
     Custom QFrame class to represent an item for a file in the list.
     """
 
-    def __init__(self, parent=None) -> None:
+    def __init__(self, parent=None, dir="") -> None:
         """
         Constructor to initialize the FileItem.
         """
         super().__init__(parent)
         self.filepath = ""
+        self.dir = dir
 
         layout = QHBoxLayout()
         self.choose_file_btn = QPushButton("Choose File")
@@ -56,6 +58,7 @@ class FileItem(QFrame):
         self.filepath, _ = QFileDialog.getOpenFileName(
             self,
             "Select Files",
+            dir=self.dir,
         )
         if self.filepath:
             self.label.setText(Path(self.filepath).name)
@@ -77,6 +80,8 @@ class FileList(QWidget):
         self.add_file_btn = QPushButton("Add File")
         self.add_file_btn.clicked.connect(self.add_file)
 
+        self.dir = ""
+
         layout.addWidget(self.list_widget)
         layout.addWidget(self.add_file_btn)
         self.setLayout(layout)
@@ -85,7 +90,7 @@ class FileList(QWidget):
         """
         Method to add a new file to the list.
         """
-        file_widget = FileItem()
+        file_widget = FileItem(dir=self.dir)
 
         cb = QPushButton("X")
         cb.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
@@ -108,7 +113,7 @@ class FileList(QWidget):
         self.list_widget.takeItem(self.list_widget.row(item))
 
     @property
-    def filepaths(self) -> list[str]:
+    def filepaths(self) -> List[str]:
         """
         Property to get the list of filepaths currently in the list.
         """

@@ -11,3 +11,4 @@
 # --------------------------------------------------------------
 
 from .item import ComponentItem
+from .upload_form import ComponentUploadWidget

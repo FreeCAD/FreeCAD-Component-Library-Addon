@@ -10,7 +10,7 @@
 # |																|
 # --------------------------------------------------------------
 
-from PySide6.QtWidgets import QWidget
+from PySide2.QtWidgets import QWidget
 
 from ....data import Component
 from .Ui_item_view import Ui_ComponentItemView
@@ -38,15 +38,18 @@ class ComponentItem(QWidget):
         self.ui.componentLabel.setText(self.component.metadata.name)
         self.ui.thumbnail.setupThumbnail(self.component.metadata.thumbnail)
 
+    @property
     def parentGrigView(self):
         return self.parent().parent().parent().parent()
 
     def mousePressEvent(self, event) -> None:
-        self.topLevelWidget().widgetStack.append(self.parentGrigView())
+        self.topLevelWidget().widgetStack.append(self.parentGrigView)
         return super().mousePressEvent(event)
 
     def mouseReleaseEvent(self, event) -> None:
         posMouse = event.pos()
         if self.rect().contains(posMouse):
-            self.topLevelWidget().display_detail_view(self, self.parentGrigView())
-            return super().mouseReleaseEvent(event)
+            self.parentGrigView.detailView.updateContent(self)
+            self.topLevelWidget().ui.stackedWidget.setCurrentWidget(
+                self.parentGrigView.detailView
+            )

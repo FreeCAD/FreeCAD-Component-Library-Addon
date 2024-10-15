@@ -11,5 +11,5 @@
 # --------------------------------------------------------------
 
 from .data_types import DTypes, FileTypes
-from .datadef import Component, Tag, File, DataJsonEncoder, SerialisedDataType
+from .datadef import Component, DataJsonEncoder, File, SerialisedDataType, Tag, User
 from .factory import DataFactory, DTypes
